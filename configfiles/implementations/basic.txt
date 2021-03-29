@@ -28,11 +28,10 @@ nbArgs 0
 4 agent.behaviour.basic.AgentDropsPacket
 nbArgs 0
 
-nbChanges 4
+nbChanges 2
 
 
 
-                                    # First change, from behaviour with ID 1 to behaviour with ID 2
 agent.behaviour.basic.change.PacketInPerception
 nbArgs 0                            # The constructor of ConditionOne takes 0 args
 priority 0                          # Higher value −> higher priority (in case of multiple satisfied change conditions from current behaviour state)

@@ -49,6 +49,24 @@ public class AgentDropsPacket extends LTDBehaviour {
             });
 
         }
+        if (!agent.seeDestination()) {
+            // AGENT WANDERS RANDOMLY SINCE THERE IS NO VISIBLE packet
+            Collections.shuffle(moves);
+
+        }
+        // Check for viable moves
+        for (var move : moves) {
+            var perception = agent.getPerception();
+            int x = move.getX();
+            int y = move.getY();
+
+            // If the area is null, it is outside of the bounds of the environment
+            //  (when the agent is at any edge for example some moves are not possible)
+            if (perception.getCellPerceptionOnRelPos(x, y) != null && perception.getCellPerceptionOnRelPos(x, y).isWalkable()) {
+                agent.step(agent.getX() + x, agent.getY() + y); // !!!
+                return;
+            }
+        }
     }
 
     @Override

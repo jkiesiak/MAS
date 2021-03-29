@@ -44,6 +44,22 @@ public class AgentGoesToPacket extends LTDBehaviour {
             });
 
         }
+        // Check for viable moves
+        for (var move : moves) {
+            var perception = agent.getPerception();
+            int x = move.getX();
+            int y = move.getY();
+
+            // If the area is null, it is outside of the bounds of the environment
+            //  (when the agent is at any edge for example some moves are not possible)
+            if (perception.getCellPerceptionOnRelPos(x, y) != null && perception.getCellPerceptionOnRelPos(x, y).isWalkable()) {
+                agent.step(agent.getX() + x, agent.getY() + y); // !!!
+                return;
+            }
+        }
+
+        // No viable moves, skip turn
+        agent.skip();
 //        else {
 //            Collections.shuffle(moves);
 //        }
