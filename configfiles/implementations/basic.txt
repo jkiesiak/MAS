@@ -30,9 +30,6 @@ nbArgs 0
 
 nbChanges 4
 
-agent.behaviour.basic.change.PacketInPerception
-agent.behaviour.basic.change.PacketCarried
-agent.behaviour.basic.change.DestinationInPerception
 
 
                                     # First change, from behaviour with ID 1 to behaviour with ID 2
