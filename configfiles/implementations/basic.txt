@@ -1,0 +1,62 @@
+description "Implementation of different behaviours and changes between behaviours"
+
+
+# STATE 1) an agent does not have a packet in his perception;wanders        ; class AgentWanders
+# CONDITIONAL: until he see a package, he wanders; seePacket()                      ; class PacketInPerception
+
+
+# STATE 2) an agent see a packet in his perception,goes to grab a packet    ; class AgentGoesToPacket
+# in this behaviour agent picks up the package
+# CONDITIONAL: check if he's holding a packet; hasCarry()                           ; class PacketCarried
+
+
+# STATE 3) an agent does not have a destination in his perception;wanders    ; class AgentCarriesPacketToTarget
+# CONDITIONAL: until he see a destination ; seeDestination()                        ; class DestinationInPerception
+
+# STATE 4) an agent see a packet in his destination,goes to leave at target    ; class AgentDropsPacket
+# CONDITIONAL: if agent don't carry packet, go to behaviour 1; hasCarry()           ; class PacketCarried
+
+
+nbStates 4                              # 2 behaviour states
+
+1 agent.behaviour.basic.AgentWanders          # First behaviour
+nbArgs 0
+2 agent.behaviour.basic.AgentGoesToPacket
+nbArgs 0
+3 agent.behaviour.basic.AgentCarriesPacketToTarget
+nbArgs 0
+4 agent.behaviour.basic.AgentDropsPacket
+nbArgs 0
+
+nbChanges 4
+
+agent.behaviour.basic.change.PacketInPerception
+agent.behaviour.basic.change.PacketCarried
+agent.behaviour.basic.change.DestinationInPerception
+
+
+                                    # First change, from behaviour with ID 1 to behaviour with ID 2
+agent.behaviour.basic.change.PacketInPerception
+nbArgs 0                            # The constructor of ConditionOne takes 0 args
+priority 0                          # Higher value −> higher priority (in case of multiple satisfied change conditions from current behaviour state)
+source 1                            # ID of starting behaviour
+target 2                            # ID of resulting behaviour
+
+
+agent.behaviour.basic.change.PacketCarried
+nbArgs 0
+priority 0
+source 2
+target 3
+
+agent.behaviour.basic.change.DestinationInPerception
+nbArgs 0
+priority 0
+source 3
+target 4
+
+agent.behaviour.basic.change.PacketCarried
+nbArgs 0
+priority 0
+source 4
+target 1

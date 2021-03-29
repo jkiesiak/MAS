@@ -1,0 +1,37 @@
+description "Randomly wandering around"
+
+
+# ------------------------------------------------
+# The amount of the behaviour states the agent has
+# ------------------------------------------------
+nbStates 1                          # The wander behaviour is implemented in a single state
+
+
+# Enumeration of the behaviour agent states
+1 agent.behaviour.wander.Wander     # First and only agent state of class "agent.behaviour.wander.Wander"
+nbArgs 0                            # 0 arguments required for the constructor of "agent.behaviour.wander.Wander"
+
+
+
+# ---------------------------------------------------------------
+# The amount of behaviour changes for the agent
+#  (only necessary when more than 1 agent behaviour is specified)
+# ---------------------------------------------------------------
+nbChanges 0                         # This implementation does not have any behaviour changes
+                                    # (no different agent behaviour state to change to)
+
+
+
+
+# ----------------
+# Further comments
+# ----------------
+
+#  Each agent has the same implementation, e.g. all agents work with a single Wander behaviour state
+#    when you choose this implementation file.
+
+#  Since the wander behaviour is quite simple, there is no need to split up the implementation in multiple behaviours.
+#    For this implementation, a single state suffices to implement the wander behaviour.
+
+#  In case of more complex implementations, it becomes more desirable to split the behaviour up in different states
+#    so that the complexity becomes easier to manage.
