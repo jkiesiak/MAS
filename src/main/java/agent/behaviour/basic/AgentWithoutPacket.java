@@ -11,7 +11,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class AgentGoesToPacket extends LTDBehaviour {
+public class AgentWithoutPacket extends LTDBehaviour {
     @Override
     public void act(AgentImp agent) {
         // Potential moves an agent can make (radius of 1 around the agent)
@@ -22,7 +22,12 @@ public class AgentGoesToPacket extends LTDBehaviour {
                 new Coordinate(1, -1), new Coordinate(-1, 1)
         ));
 
-        if (agent.seePacket()) {
+        if (!agent.seePacket()){
+            // AGENT WANDERS RANDOMLY SINCE THERE IS NO VISIBLE packet
+            Collections.shuffle(moves);
+
+        }
+        if(agent.seePacket()) {
             // AGENT DOESN'T CARRY A PACKET, BUT HE SEES ONE, SO HE GOES TOWARDS IT
             PacketRep closestPacket = agent.getClosestVisiblePacket();
             int cpX = closestPacket.getX();
@@ -30,16 +35,16 @@ public class AgentGoesToPacket extends LTDBehaviour {
 
             int dist = Perception.manhattanDistance(cpX, cpY, agent.getX(), agent.getY());
 
-            if (dist <= 1) {
+            if(dist <= 1){
                 agent.pickPacket(cpX, cpY);
                 return;
             }
 
-            moves.sort(new Comparator<Coordinate>() {
+            moves.sort(new Comparator<Coordinate>(){
                 @Override
-                public int compare(Coordinate c1, Coordinate c2) {
-                    return ((Integer) Perception.manhattanDistance(cpX, cpY, agent.getX() + c1.getX(), agent.getY() + c1.getY()))
-                            .compareTo(Perception.manhattanDistance(cpX, cpY, agent.getX() + c2.getX(), agent.getY() + c2.getY()));
+                public int compare(Coordinate c1, Coordinate c2){
+                    return ((Integer)Perception.manhattanDistance(cpX, cpY, agent.getX() + c1.getX(), agent.getY() + c1.getY()))
+                            .compareTo(Perception.manhattanDistance(cpX, cpY, agent.getX() + c2.getX(), agent.getY()+ c2.getY() ));
                 }
             });
 
@@ -57,12 +62,10 @@ public class AgentGoesToPacket extends LTDBehaviour {
                 return;
             }
         }
+//
+//        // No viable moves, skip turn
+//        agent.skip();
 
-        // No viable moves, skip turn
-        agent.skip();
-//        else {
-//            Collections.shuffle(moves);
-//        }
     }
 
     @Override

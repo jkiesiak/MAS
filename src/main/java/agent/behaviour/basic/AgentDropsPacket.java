@@ -67,6 +67,8 @@ public class AgentDropsPacket extends LTDBehaviour {
                 return;
             }
         }
+        // No viable moves, skip turn
+        agent.skip();
     }
 
     @Override
