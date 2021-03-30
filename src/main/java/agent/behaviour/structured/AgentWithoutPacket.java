@@ -1,4 +1,4 @@
-package agent.behaviour.basic;
+package agent.behaviour.structured;
 
 import agent.AgentImp;
 import agent.behaviour.LTDBehaviour;

@@ -8,21 +8,21 @@ description "Implementation of states behaviours and changes between behaviours 
 
 nbStates 2                              # 2 behaviour states
 
-1 agent.behaviour.basic.AgentWithoutPacket          # First behaviour
+1 agent.behaviour.structured.AgentWithoutPacket          # First behaviour
 nbArgs 0
 
-2 agent.behaviour.basic.AgentDropsPacket
+2 agent.behaviour.structured.AgentDropsPacket
 nbArgs 0
 
 nbChanges 2
 
-agent.behaviour.basic.change.PacketCarried
+agent.behaviour.structured.change.PacketCarried
 nbArgs 0
 priority 0
 source 1
 target 2
 
-agent.behaviour.basic.change.PacketNotCarried
+agent.behaviour.structured.change.PacketNotCarried
 nbArgs 0
 priority 0
 source 2

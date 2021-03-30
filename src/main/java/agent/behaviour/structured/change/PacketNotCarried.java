@@ -1,4 +1,4 @@
-package agent.behaviour.basic.change;
+package agent.behaviour.structured.change;
 
 import agent.behaviour.BehaviourChange;
 /**
