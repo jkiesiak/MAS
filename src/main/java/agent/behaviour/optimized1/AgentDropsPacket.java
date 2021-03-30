@@ -23,7 +23,6 @@ public class AgentDropsPacket extends LTDBehaviour {
 
     @Override
     public void act(AgentImp agent) {
-        System.out.println("Sad sam u optimizatoru!");
         // Potential moves an agent can make (radius of 1 around the agent)
         List<Coordinate> moves = new ArrayList<>(List.of(
                 new Coordinate(1, 1), new Coordinate(-1, -1),
