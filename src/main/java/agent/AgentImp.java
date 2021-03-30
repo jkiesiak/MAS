@@ -28,6 +28,7 @@ import java.util.List;
  */
 abstract public class AgentImp extends ActiveImp {
 
+    private ArrayList<DestinationRep> seenDestionations = new ArrayList<DestinationRep>();
     /**
      *  Initialize a new instance of AgentImp with id <ID>. Every new AgentImp
      *  instance is initialized with an empty buffer for incoming messages
@@ -450,9 +451,36 @@ abstract public class AgentImp extends ActiveImp {
         }
         return false;
     }
+    /**
+     * Returns all visible destinations regardless of their color
+     *
+     * @return <code>DestinationRep</code> closest destination rep. of the same color
+     */
+    public ArrayList<DestinationRep> getAllVisibleDestinations() {
+        int vw = getPerception().getWidth();
+        int vh = getPerception().getHeight();
 
+        ArrayList<DestinationRep> visibleDestionations  = new ArrayList<DestinationRep>();
 
-    public DestinationRep getClosestDestination() {
+        if (hasCarry()) {
+            for (int i = 0; i < vw; i++) {
+                for (int j = 0; j < vh; j++) {
+                    DestinationRep destRep = getPerception().getCellAt(i, j).getRepOfType(DestinationRep.class);
+                    if (destRep != null) {
+                        visibleDestionations.add(destRep);
+                    }
+                }
+            }
+        }
+        return visibleDestionations;
+    }
+    /**
+     * Returns closest destination that this agent sees of the same color of his
+     * carry.
+     *
+     * @return <code>DestinationRep</code> closest destination rep. of the same color
+     */
+    public DestinationRep getClosestVisibleDestination() {
         int vw = getPerception().getWidth();
         int vh = getPerception().getHeight();
 
@@ -474,6 +502,38 @@ abstract public class AgentImp extends ActiveImp {
             }
         }
         return closestDestination;
+    }
+
+    /**
+     * Returns closest destination that this agent remembers of the same color of his
+     * carry.
+     *
+     * @return <code>DestinationRep</code> closest remembered destination rep. of the same color
+     */
+    public DestinationRep getClosestDestinationMemory(){
+        DestinationRep closestRep = null;
+        int minDist = Integer.MAX_VALUE;
+
+        for(DestinationRep dest : seenDestionations){
+            if(dest.getColor() == getCarry().getColor()){
+                int packageDist = Perception.manhattanDistance(getX(), getY(), dest.getX(), dest.getY());
+                if(closestRep == null || packageDist < minDist ){
+                    minDist = packageDist;
+                    closestRep = dest;
+                }
+            }
+        }
+        return closestRep;
+    }
+
+    /**
+     * Add destination to memory of destinations, if the destination is already remembered, do nothing.
+     */
+    public void addToMemory(DestinationRep dest){
+        if(!seenDestionations.contains(dest))
+            seenDestionations.add(dest);
+
+        return;
     }
 
     /**

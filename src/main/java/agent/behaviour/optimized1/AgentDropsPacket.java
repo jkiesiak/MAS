@@ -34,10 +34,14 @@ public class AgentDropsPacket extends LTDBehaviour {
         /**
          * Sets the behaviour for an agent, who has a destination in his perception. Agent goes towards it.
          */
-        if (agent.seeDestination()) {
+        // Memorize visible destinations
+        for(DestinationRep destRep : agent.getAllVisibleDestinations()){
+            agent.addToMemory(destRep);
+        }
+        DestinationRep closestDest = agent.getClosestDestinationMemory();
+        if (closestDest != null ) {
             // AGENT HAS A PACKET AND SEES A DESTINATION
 
-            DestinationRep closestDest = agent.getClosestDestination();
 
             int destX = closestDest.getX();
             int destY = closestDest.getY();
@@ -61,7 +65,7 @@ public class AgentDropsPacket extends LTDBehaviour {
         /**
          * Sets the behaviour for an agent, who has not a destination in his perception.
          */
-        if (!agent.seeDestination()) {
+        else{
             // AGENT WANDERS RANDOMLY SINCE THERE IS NO VISIBLE packet
             Collections.shuffle(moves);
 

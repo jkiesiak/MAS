@@ -37,7 +37,7 @@ public class AgentDropsPacket extends LTDBehaviour {
         if (agent.seeDestination()) {
             // AGENT HAS A PACKET AND SEES A DESTINATION
 
-            DestinationRep closestDest = agent.getClosestDestination();
+            DestinationRep closestDest = agent.getClosestVisibleDestination();
 
             int destX = closestDest.getX();
             int destY = closestDest.getY();

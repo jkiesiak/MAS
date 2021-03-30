@@ -4,6 +4,7 @@ import agent.AgentImp;
 import agent.behaviour.LTDBehaviour;
 import environment.Coordinate;
 import environment.Perception;
+import environment.world.destination.DestinationRep;
 import environment.world.packet.PacketRep;
 
 import java.util.ArrayList;
@@ -28,6 +29,12 @@ public class AgentWithoutPacket extends LTDBehaviour {
                 new Coordinate(0, 1), new Coordinate(0, -1),
                 new Coordinate(1, -1), new Coordinate(-1, 1)
         ));
+
+        // Memorize visible destinations
+        for(DestinationRep destRep : agent.getAllVisibleDestinations()){
+            agent.addToMemory(destRep);
+        }
+
         /**
          * Sets the behaviour for an agent, who has not a packet in his perception.
          */
