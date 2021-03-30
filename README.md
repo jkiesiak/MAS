@@ -38,6 +38,9 @@ Finally, if desired, you can clear previously built source files with the follow
 
 `mvn clean`
 
+## Implementation
+
+Three implementations are added to the PacketWorld software. Firstly, the "simple" agent behaviour which is limits itself towards wandering, picking up and dropping packages codes in one class. Secondly, the structered agent behaviour which has the same functionalities as the simple implementation but is codes in a object oriented manner. Finally, the optimised1 agent behaviour which optimised the structured implementation by allowing agents to remember package destinations. 
 
 
 ## Final notes
