@@ -556,6 +556,12 @@ abstract public class AgentImp extends ActiveImp {
         return false;
     }
 
+
+    /**
+     * Returns closest visible packet (Manhattan distance)
+     *
+     * @return <code>PackageRep</code> closest visible packet
+     */
     public PacketRep getClosestVisiblePacket(){
 
         PacketRep closestPacket = null;
@@ -577,6 +583,11 @@ abstract public class AgentImp extends ActiveImp {
         return closestPacket;
     }
 
+    /**
+     * Returns visible packets sorted by their Manhattan distance
+     *
+     * @return <code>visiblePackets</code> sorted visible packets
+     */
     public List<PacketRep> getVisiblePacketsSorted(){
         int vw = getPerception().getWidth();
         int vh = getPerception().getHeight();
