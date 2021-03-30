@@ -1,0 +1,29 @@
+description "1st optimized implementation of states behaviours and changes between behaviours based on conditionals"
+
+# STATE 1) an agent does not have a packet                                 ; class AgentWithoutPacket
+# CONDITIONAL: until he picks up a package                                        ; class PacketCarried
+
+# STATE 2) an agent holds a packet in his perception,goes to grab a packet    ; class AgentDropsPacket
+# CONDITIONAL: check if he dropped a packet                                       ; class PacketNotCarried
+
+nbStates 2                              # 2 behaviour states
+
+1 agent.behaviour.optimized1.AgentWithoutPacket          # First behaviour
+nbArgs 0
+
+2 agent.behaviour.optimized1.AgentDropsPacket
+nbArgs 0
+
+nbChanges 2
+
+agent.behaviour.optimized1.change.PacketCarried
+nbArgs 0
+priority 0
+source 1
+target 2
+
+agent.behaviour.optimized1.change.PacketNotCarried
+nbArgs 0
+priority 0
+source 2
+target 1
