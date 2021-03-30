@@ -1,4 +1,4 @@
-description "Implementation of different behaviours and changes between behaviours"
+description "Implementation of states behaviours and changes between behaviours based on conditionals"
 
 # STATE 1) an agent does not have a packet                                 ; class AgentWithoutPacket
 # CONDITIONAL: until he picks up a package                                        ; class PacketCarried

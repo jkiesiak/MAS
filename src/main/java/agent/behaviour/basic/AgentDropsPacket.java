@@ -11,6 +11,13 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ *  This class represent the agent's behaviour when he carries a package in the environment towards the destination.
+ *  The implementation contains two possible moves. First, an agent has a destination in his perception,
+ *  thus he moves towards the destination to drop the package.
+ *  Second, an agent has not the destination in his perception, thus randomly wanders.
+ */
+
 public class AgentDropsPacket extends LTDBehaviour {
 
 
@@ -24,7 +31,9 @@ public class AgentDropsPacket extends LTDBehaviour {
                 new Coordinate(0, 1), new Coordinate(0, -1),
                 new Coordinate(1, -1), new Coordinate(-1, 1)
         ));
-
+        /**
+         * Sets the behaviour for an agent, who has a destination in his perception. Agent goes towards it.
+         */
         if (agent.seeDestination()) {
             // AGENT HAS A PACKET AND SEES A DESTINATION
 
@@ -49,6 +58,9 @@ public class AgentDropsPacket extends LTDBehaviour {
             });
 
         }
+        /**
+         * Sets the behaviour for an agent, who has not a destination in his perception.
+         */
         if (!agent.seeDestination()) {
             // AGENT WANDERS RANDOMLY SINCE THERE IS NO VISIBLE packet
             Collections.shuffle(moves);

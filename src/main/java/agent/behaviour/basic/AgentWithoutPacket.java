@@ -11,6 +11,13 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ *  This class represent the agent's behaviour when he doesn't carry a package in the environment.
+ *  The implementation contains two possible moves. First, an agent has a packet in his perception,
+ *  thus he moves towards the packet to pick it up.
+ *  Second, an agent has not the packet in his perception, thus randomly wanders.
+ */
+
 public class AgentWithoutPacket extends LTDBehaviour {
     @Override
     public void act(AgentImp agent) {
@@ -21,12 +28,17 @@ public class AgentWithoutPacket extends LTDBehaviour {
                 new Coordinate(0, 1), new Coordinate(0, -1),
                 new Coordinate(1, -1), new Coordinate(-1, 1)
         ));
-
+        /**
+         * Sets the behaviour for an agent, who has not a packet in his perception.
+         */
         if (!agent.seePacket()){
             // AGENT WANDERS RANDOMLY SINCE THERE IS NO VISIBLE packet
             Collections.shuffle(moves);
 
         }
+        /**
+         * Sets the behaviour for an agent, who has a packet in his perception. Agent goes towards it.
+         */
         if(agent.seePacket()) {
             // AGENT DOESN'T CARRY A PACKET, BUT HE SEES ONE, SO HE GOES TOWARDS IT
             PacketRep closestPacket = agent.getClosestVisiblePacket();
